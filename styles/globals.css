@@ -360,4 +360,6 @@ input {
   .main-title-container {
     align-items: flex-end;
   }
+  .footer-links-container {
+    width: 100%;
 }
