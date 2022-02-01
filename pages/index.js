@@ -28,7 +28,7 @@ const links = [
 export default function Home() {
   const router = useRouter();
   const [matches, setMatches] = useState([]);
-  const [counter, setCounter] = useState(0);
+  let counter = 0;
   useEffect(() => {
     getDocs(collection(firestore, `matches`)).then((res) => {
       setMatches(
@@ -69,7 +69,7 @@ export default function Home() {
         <div className="matches-main-container">
           <div className="matches-container">
             {matches.map((data) => {
-              setCounter(counter + 1);
+              ++counter;
               return (
                 <div className="one-match-container">
                   <div className="logos-container">
