@@ -214,6 +214,7 @@ img {
   display: grid;
   grid-template-columns: 18rem;
   grid-template-rows: 60% 10% 10% 10% 10%;
+  position: relative;
 }
 
 .logos-container {
@@ -264,6 +265,13 @@ img {
 
 input {
   color: black;
+}
+
+.match-no {
+  position: absolute;
+  top: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 @media screen and (max-width: 500px) {
