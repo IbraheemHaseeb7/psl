@@ -209,7 +209,6 @@ img {
   border: 1px solid green;
   border-radius: 0.5rem;
   background-color: #f6f6f63d;
-  backdrop-filter: blur(10px);
   margin: 0 1rem 0rem 1rem;
   display: grid;
   grid-template-columns: 18rem;
