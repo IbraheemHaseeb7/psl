@@ -28,6 +28,7 @@ const links = [
 export default function Home() {
   const router = useRouter();
   const [matches, setMatches] = useState([]);
+  const [counter, setCounter] = useState(0);
   useEffect(() => {
     getDocs(collection(firestore, `matches`)).then((res) => {
       setMatches(
@@ -68,6 +69,7 @@ export default function Home() {
         <div className="matches-main-container">
           <div className="matches-container">
             {matches.map((data) => {
+              setCounter(counter + 1);
               return (
                 <div className="one-match-container">
                   <div className="logos-container">
@@ -88,6 +90,7 @@ export default function Home() {
                   <h6 className="stadiums">{data.stadium}</h6>
                   <h6 className="date">{data.date}</h6>
                   <h6 className="time">{data.wqt}</h6>
+                  <h6 className="match-no">Match {counter}</h6>
                 </div>
               );
             })}
