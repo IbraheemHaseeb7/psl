@@ -9,12 +9,6 @@ import { auth } from "../lib/firebase";
 
 function MyApp({ Component, pageProps }) {
   const data = useData();
-  const router = useRouter();
-  useEffect(() => {
-    if (router.pathname === "/") {
-      signOut(auth);
-    }
-  }, [router.pathname]);
   return (
     <UserContext.Provider value={data}>
       {data.signIn && <Navbar />}
