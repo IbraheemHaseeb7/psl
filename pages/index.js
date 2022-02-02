@@ -25,10 +25,39 @@ const links = [
   },
 ];
 
+const monthsNames = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
+
 export default function Home() {
   const router = useRouter();
   const [matches, setMatches] = useState([]);
+  const date = new Date().toString().split(" ");
   let counter = 0;
+
+  //date variables
+  let myMonth = checkMyMonth(monthsNames, date);
+  let myDate = checkMyDate(date);
+  let myTime = checkMyTime(date);
+  let matchMonth;
+  let matchDate;
+  let matchTime;
+  let thisMonth;
+  let tomorrow;
+  let today;
+  let live;
+
   useEffect(() => {
     getDocs(collection(firestore, `matches`)).then((res) => {
       setMatches(
@@ -38,6 +67,51 @@ export default function Home() {
       );
     });
   }, [router.pathname]);
+
+  //checking my month
+  function checkMyMonth(monthsNames, date) {
+    let count = 0;
+    for (count = 0; count < 12; count++) {
+      if (monthsNames[count] === date[1]) {
+        return count + 1;
+      }
+    }
+  }
+
+  //checking my date
+  function checkMyDate(date) {
+    return parseInt(date[2]);
+  }
+
+  //checking my time
+  function checkMyTime(time) {
+    let getTime = time[4].split("");
+    let hours = parseInt(getTime[0] + getTime[1]);
+    let minutes = parseInt(getTime[3] + getTime[4]);
+    return { hours, minutes };
+  }
+
+  //checking match month
+  function checkMatchMonth(date) {
+    let matchMonth = date.split("");
+    let finalMatchMonth = parseInt(matchMonth[5] + matchMonth[6]);
+    return finalMatchMonth;
+  }
+
+  //checking match date
+  function checkMatchDate(date) {
+    let matchDate = date.split("");
+    let finalMatchDate = parseInt(matchDate[8] + matchDate[9]);
+    return finalMatchDate;
+  }
+
+  //checking match time
+  function checkMatchTime(time) {
+    let getTime = time.toString().split("");
+    let hours = parseInt(getTime[0] + getTime[1]);
+    let minutes = parseInt(getTime[3] + getTime[4]);
+    return { hours, minutes };
+  }
 
   return (
     <div className="home-container">
@@ -69,8 +143,50 @@ export default function Home() {
           <div className="matches-container">
             {matches.map((data) => {
               ++counter;
+              matchMonth = checkMatchMonth(data.date);
+              matchDate = checkMatchDate(data.date);
+              matchTime = checkMatchTime(data.wqt);
+
+              //checking for this month
+              let calculatedMonth = myMonth - matchMonth;
+              if (calculatedMonth === 0) {
+                thisMonth = true;
+              } else {
+                thisMonth = false;
+              }
+
+              //checking for tomorrow and today
+              if (thisMonth) {
+                let calculatedDate = myDate - matchDate;
+                if (calculatedDate === -1) {
+                  tomorrow = true;
+                  live = false;
+                  today = false;
+                } else if (calculatedDate === 0) {
+                  today = true;
+                  //checking for live
+                  if (today) {
+                    let calculatedTime = myTime.hours - matchTime.hours;
+                    console.log(calculatedTime);
+                    if (calculatedTime >= 0 && calculatedTime <= 4) {
+                      live = true;
+                      today = false;
+                    }
+                  } else {
+                    today = false;
+                  }
+                  tomorrow = false;
+                } else {
+                  tomorrow = false;
+                  today = false;
+                }
+              }
+
               return (
                 <div className="one-match-container">
+                  {tomorrow && <h6 className="tomorrow">tomorrow</h6>}
+                  {today && <h6 className="tomorrow">today</h6>}
+                  {live && <h6 className="live">live</h6>}
                   <div className="logos-container">
                     <img
                       src={data.team1logo}
