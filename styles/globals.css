@@ -209,6 +209,7 @@ img {
   border: 1px solid green;
   border-radius: 0.5rem;
   background-color: #f6f6f63d;
+  backdrop-filter: blur(10px);
   margin: 0 1rem 0rem 1rem;
   display: grid;
   grid-template-columns: 18rem;
@@ -284,6 +285,29 @@ img {
   color: black;
 }
 
+.tomorrow {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background-color: #f6f6f6;
+  border-radius: 0.5rem;
+  color: black;
+  margin: 0;
+  padding: 0 0.5rem;
+  border: 1px solid green;
+}
+
+.live {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background-color: red;
+  border-radius: 0.5rem;
+  color: white;
+  margin: 0;
+  padding: 0 0.5rem;
+  border: 1px solid green;
+}
 /* --------------------CREATE NEW POST CONTAINER---------------------- */
 .create-new-post-container {
   width: 100%;
@@ -359,8 +383,5 @@ input {
   }
   .main-title-container {
     align-items: flex-end;
-  }
-  .footer-links-container {
-    width: 100%;
   }
 }
