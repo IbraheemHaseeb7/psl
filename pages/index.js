@@ -167,13 +167,13 @@ export default function Home() {
                   //checking for live
                   if (today) {
                     let calculatedTime = myTime.hours - matchTime.hours;
-                    console.log(calculatedTime);
                     if (calculatedTime >= 0 && calculatedTime <= 4) {
                       live = true;
                       today = false;
                     }
                   } else {
                     today = false;
+                    live = false;
                   }
                   tomorrow = false;
                 } else {
