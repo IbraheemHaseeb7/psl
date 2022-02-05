@@ -170,6 +170,8 @@ export default function Home() {
                     if (calculatedTime >= 0 && calculatedTime <= 4) {
                       live = true;
                       today = false;
+                    } else {
+                      live = false;
                     }
                   } else {
                     today = false;
