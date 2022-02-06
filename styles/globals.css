@@ -205,6 +205,17 @@ img {
   overflow-x: scroll;
 }
 
+.matches-container::-webkit-scrollbar {
+  height: 8px;
+  background-color: #f6f6f63d;
+  border-radius: 10rem;
+}
+
+.matches-container::-webkit-scrollbar-thumb {
+  background-color: #f6f6f63d;
+  border-radius: 10rem;
+}
+
 .one-match-container {
   border: 1px solid green;
   border-radius: 0.5rem;
@@ -375,6 +386,49 @@ input {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* ----------------VOTE--------------------- */
+
+.vote-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.radio {
+  display: none;
+}
+
+.vote-labels {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  width: 80%;
+  border-radius: 0.5rem;
+  height: 2rem;
+  border: 1px solid white;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.label-checked {
+  cursor: not-allowed;
+  border: 1px solid #f6f6f63d;
+}
+
+.vote-labels span {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: #00ff80;
+  border-radius: 0.5rem;
+  transition: all 0.5s ease;
 }
 
 @media screen and (max-width: 500px) {
