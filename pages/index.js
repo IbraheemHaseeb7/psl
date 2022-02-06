@@ -1,8 +1,9 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useLayoutEffect } from "react";
 import { useRouter } from "next/router";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { firestore } from "../lib/firebase";
+import Vote from "../components/Vote";
 
 const links = [
   {
@@ -25,6 +26,8 @@ const links = [
   },
 ];
 
+const checkboxes = ["LQ", "PZ", "KK", "QG", "IU", "MS"];
+
 const monthsNames = [
   "Jan",
   "Feb",
@@ -43,6 +46,7 @@ const monthsNames = [
 export default function Home() {
   const router = useRouter();
   const [matches, setMatches] = useState([]);
+  const [checked, setChecked] = useState(false);
   const date = new Date().toString().split(" ");
   let counter = 0;
 
@@ -170,12 +174,9 @@ export default function Home() {
                     if (calculatedTime >= 0 && calculatedTime <= 4) {
                       live = true;
                       today = false;
-                    } else {
-                      live = false;
                     }
                   } else {
                     today = false;
-                    live = false;
                   }
                   tomorrow = false;
                 } else {
@@ -214,6 +215,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <Vote />
       <div className="more-container">
         <h2 className="more">More from The Developer</h2>
       </div>
